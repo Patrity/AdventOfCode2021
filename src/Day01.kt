@@ -1,17 +1,21 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+
+    fun part1(input: List<String>) {
+        for (i in input.indices) {
+            print("${input[i]} ")
+            if (i == 0)
+                println("(N/A - no previous measurement)")
+            else
+                if (input[i] > input[i - 1])
+                    println("(increased)") else println("(decreased)")
+        }
     }
 
     fun part2(input: List<String>): Int {
         return input.size
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
     val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    part1(input)
+    //println(part2(input))
 }
