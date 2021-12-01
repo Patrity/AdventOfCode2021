@@ -1,21 +1,29 @@
 fun main() {
 
-    fun part1(input: List<String>) {
-        for (i in input.indices) {
-            print("${input[i]} ")
-            if (i == 0)
+    fun part1(input: List<Int>) {
+        var increased = 0
+        var lastDepth = 0
+        for ((i, value) in input.withIndex()) {
+            print("$value ")
+            if (lastDepth == 0)
                 println("(N/A - no previous measurement)")
             else
-                if (input[i] > input[i - 1])
-                    println("(increased)") else println("(decreased)")
+                if (value > lastDepth) {
+                    println("(increased)")
+                    increased++
+                } else
+                    println("(decreased)")
+            lastDepth = value
         }
+        println(increased)
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part2(input: List<String>):List<Int>{
+        return input.map(String::toInt).windowed(3).map(List<Int>::sum)
     }
 
     val input = readInput("Day01")
-    part1(input)
-    //println(part2(input))
+    val intInput = input.map(String::toInt)
+    part1(intInput)
+    part1(part2(input))
 }
